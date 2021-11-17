@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  database:
+    image: "postgres"
+    env_file:
+      - database.env
+    volumes:
+      - database-volume:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+volumes:
+  database-volume:
