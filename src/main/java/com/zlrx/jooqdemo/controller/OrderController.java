@@ -1,5 +1,6 @@
 package com.zlrx.jooqdemo.controller;
 
+import com.zlrx.jooqdemo.model.OrderData;
 import com.zlrx.jooqdemo.model.OrderItemData;
 import com.zlrx.jooqdemo.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,14 @@ public class OrderController {
     private OrderRepository orderRepository;
 
     @GetMapping("order-items/{batchId}")
-    public List<OrderItemData> loadOrderItems(@PathVariable int batchId) {
-        return orderRepository.findByBatchId(batchId);
+    public List<OrderItemData> getOrderItems(@PathVariable int batchId) {
+        return orderRepository.findOrderItemsByOrderBatchId(batchId);
     }
 
+    @GetMapping("order/{batchId}")
+    public List<OrderData> getOrders(@PathVariable int batchId) {
+        var result = orderRepository.findOrderByOrderBatchId(batchId);
+        return result;
+    }
 
 }
